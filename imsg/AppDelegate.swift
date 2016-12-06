@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -19,34 +19,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //UNUserNotificationCenter.current()
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+        center.delegate = self;
+        center.requestAuthorization(options:[.alert, .sound]) { (granted, error) in
             // Enable or disable features based on authorization.
             if error == nil{
                 UIApplication.shared.registerForRemoteNotifications()
-                print("registerForRemoteNotifications")
-                
-                
-                let oneAction = UNNotificationAction(identifier: "ONE_ACTION",
-                                                        title: "One",
-                                                        options: UNNotificationActionOptions(rawValue: 0))
-
-                let twoAction = UNNotificationAction(identifier: "TWO_ACTION",
-                                                      title: "Two",
-                                                      options: .foreground)
+                print("AppDelegate registerForRemoteNotifications")
                 
                 let generalCategory = UNNotificationCategory(identifier: "GENERAL",
-                                                             actions: [oneAction, twoAction],
+                                                             actions: [],
                                                              intentIdentifiers: [],
                                                              options: .customDismissAction)
-
                 
-                UNUserNotificationCenter.current().setNotificationCategories([generalCategory])
-
+                // Create the custom actions for the TIMER_EXPIRED category.
+                let reactAction = UNNotificationAction(identifier: "REACT_ACTION",
+                                                        title: "React",
+                                                        options: UNNotificationActionOptions(rawValue: 0))
+                let stopAction = UNNotificationAction(identifier: "STOP_ACTION",
+                                                      title: "Stop",
+                                                      options: .foreground)
+                
+                let expiredCategory = UNNotificationCategory(identifier: "TIMER_EXPIRED",
+                                                             actions: [reactAction, stopAction],
+                                                             intentIdentifiers: [],
+                                                             options: UNNotificationCategoryOptions(rawValue: 0))
+                
+                // Register the notification categories.
+                center.setNotificationCategories([generalCategory, expiredCategory])
             }
         }
         // Override point for customization after application launch.
 
-        print("didFinishLaunchingWithOptions")
+        print("AppDelegate didFinishLaunchingWithOptions")
         
         return true
     }
@@ -89,5 +93,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Remote notification support is unavailable due to error: \(error.localizedDescription)")
         //self.disableRemoteNotificationFeatures()
     }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification notification: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print(notification)
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                         didReceive response: UNNotificationResponse,
+                                         withCompletionHandler completionHandler: @escaping () -> Void){
+        print(response.actionIdentifier)
+        if response.actionIdentifier == "REACT_ACTION" {
+        }else{
+            
+        }
+    
+        print("userNotificationCenter didReceive")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                         willPresent notification: UNNotification,
+                                         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+
+        print("userNotificationCenter willPresent")
+    }
+
 }
 

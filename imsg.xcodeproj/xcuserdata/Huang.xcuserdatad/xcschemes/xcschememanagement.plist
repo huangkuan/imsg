@@ -4,6 +4,26 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>IMsg_Ext.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>NCExt.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>NSExt.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>ShareExt.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>imsg.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +32,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>634CA1F61DF76BD700658B63</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>634CA2081DF7851500658B63</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6357EE211DF1DD2D00EC6651</key>
 		<dict>
 			<key>primary</key>
@@ -23,6 +53,16 @@
 			<true/>
 		</dict>
 		<key>6357EE401DF1DD2D00EC6651</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63D5B3691DF5E6D700B7DB65</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63D5B3791DF5EA7100B7DB65</key>
 		<dict>
 			<key>primary</key>
 			<true/>
